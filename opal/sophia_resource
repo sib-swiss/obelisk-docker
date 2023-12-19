@@ -1,0 +1,8 @@
+ {
+        "name":"db",
+        "project":"sophia",
+        "provider":"resourcex",
+        "factory":"sql",
+        "parameters":"{\"driver\":\"postgresql\",\"host\":\"@host@\",\"port\":\"5432\",\"db\":\"omop_test\"}",
+        "credentials":"{\"username\":\"@user@\",\"password\":\"@password@\"}"
+}
