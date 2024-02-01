@@ -13,7 +13,6 @@ services:
                 - POSTGRES_PASSWORD=opalpass    
         volumes:
                 - obelisk_data1:/obelisk/data         
-                  # added pgdata volume to separate it from the main container  
                 - ./postgresql.conf:/obelisk/conf/postgresql.conf
         shm_size: '1gb'          
 
