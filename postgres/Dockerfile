@@ -6,6 +6,5 @@ VOLUME "$PGDATA"
 RUN mkdir /scripts
 COPY *.sh /docker-entrypoint-initdb.d/
 RUN chmod 777 /docker-entrypoint-initdb.d/*
-COPY omop_test*.sql.gz /
 COPY *.sql /scripts/
 RUN chown -R postgres /scripts
