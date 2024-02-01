@@ -1,12 +1,12 @@
 FROM obiba/opal
 
-COPY omop_test_resource sophia_resource test_resource test_cnsim.json cnsim1.csv cnsim2.csv cnsim3.csv /opt/opal/data/
-COPY first_run_sophia.sh /opt/opal/bin/
-RUN chown opal /opt/opal/bin/first_run_sophia.sh
+COPY  obelisk_resource /opt/opal/data/
+COPY first_run_obelisk.sh /opt/opal/bin/
+RUN chown opal /opt/opal/bin/first_run_obelisk.sh
 RUN chown -R opal /opt/opal/data
-RUN chmod 755 /opt/opal/bin/first_run_sophia.sh
-RUN echo  "/opt/opal/bin/first_run_sophia.sh" >> /opt/opal/bin/first_run.sh
-RUN echo  "mv /opt/opal/bin/first_run_sophia.sh /opt/opal/bin/first_run_sophia.sh.done"  >> /opt/opal/bin/first_run.sh
+RUN chmod 755 /opt/opal/bin/first_run_obelisk.sh
+RUN echo  "/opt/opal/bin/first_run_obelisk.sh" >> /opt/opal/bin/first_run.sh
+RUN echo  "mv /opt/opal/bin/first_run_obelisk.sh /opt/opal/bin/first_run_obelisk.sh.done"  >> /opt/opal/bin/first_run.sh
 
 
 

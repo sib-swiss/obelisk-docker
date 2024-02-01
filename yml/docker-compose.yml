@@ -1,30 +1,34 @@
 version: '3.2'
 services:
-
-    postgres1:
-        image: idragan/postgres-sophia
-        hostname: postgres1
-        entrypoint: ["docker-entrypoint.sh", "-c", "config_file=/sophia/conf/postgresql.conf"]
+    pg-obelisk:
+        image: idragan/postgres-obelisk
+        hostname: pg-obelisk1
+        expose:
+            - 5432
+        ports:
+            - "5435:5432"
+        entrypoint: ["docker-entrypoint.sh", "-c", "config_file=/obelisk/conf/postgresql.conf"]
         environment:
-                - POSTGRES_PASSWORD=opalpass    
+                - POSTGRES_PASSWORD=opalpass
         volumes:
-                - pgdata1:/sophia/data         
+                - obelisk_data1:/obelisk/data
                   # added pgdata volume to separate it from the main container  
-                - ./postgresql.conf:/sophia/conf/postgresql.conf
-        shm_size: '1gb'          
+                - ./postgresql.conf:/obelisk/conf/postgresql.conf
+        shm_size: '1gb'
 
-    rserver1:
-        image: obiba/opal-rserver:latest
-        hostname: rserver1
+
+
+    rock-obelisk:
+        image: obiba/rock:latest
+        hostname: rock-obelisk1
         environment:
-            - JAVA_OPTS=-Xms64m -Xmx512m -XX:+UseG1GC
-        volumes:
-            - srv1:/srv
+            - JAVA_OPTS=-Xms32m -Xmx512m -XX:+UseG1GC
+        expose:
+          - 8085
 
-
-    opal_server1:
-        image: idragan/opal-sophia
-        hostname: opal_server1
+    opal-obelisk:
+        image: idragan/opal-obelisk
+        hostname: opal-obelisk1
         expose:
             - 8443
             - 8080
@@ -33,120 +37,20 @@ services:
             - "7880:8080"
             # Ports convention: <port on host>:<port inside container>
         links:
-            - rserver1
-            - postgres1  
+            - pg-obelisk
+            - rock-obelisk  
         environment:
             - JAVA_OPTS=-Xms32m -Xmx512m -XX:+UseG1GC
             - OPAL_ADMINISTRATOR_PASSWORD=password
-            - RSERVER_HOST=rserver1 
-            - POSTGRESIDS_HOST=postgres1
+            - ROCK_HOSTS=rock-obelisk1:8085
+            - POSTGRESIDS_HOST=pg-obelisk1
             - POSTGRESIDS_DATABASE=opal_id
             - POSTGRESIDS_USER=opal
             - POSTGRESIDS_PASSWORD=opalpass  
-            - POSTGRESDATA_HOST=postgres1 
+            - POSTGRESDATA_HOST=pg-obelisk1
             - POSTGRESDATA_DATABASE=opal_data
             - POSTGRESDATA_USER=opal
             - POSTGRESDATA_PASSWORD=opalpass  
-            - CNSIM_FILE=cnsim1.csv
                 
-    postgres2:
-        image: idragan/postgres-sophia
-        hostname: postgres2
-        environment:
-                - POSTGRES_PASSWORD=opalpass    
-        volumes:
-                - pgdata2:/sophia/data          
-                  # added pgdata volume to separate it from the main container
-                - ./postgresql.conf:/sophia/conf/postgresql.conf
-        shm_size: '1gb'          
-
-    rserver2:
-        image: obiba/opal-rserver:latest
-        hostname: rserver2
-        environment:
-            - JAVA_OPTS=-Xms64m -Xmx512m -XX:+UseG1GC
-        volumes:
-            - srv2:/srv
-
-
-    opal_server2:
-        image: idragan/opal-sophia
-        hostname: opal_server2
-        expose:
-            - 8443
-            - 8080
-        ports:
-            - "8843:8443"
-            - "8880:8080"
-            # Ports convention: <port on host>:<port inside container>
-        links:
-            - rserver2
-            - postgres2  
-        environment:
-            - JAVA_OPTS=-Xms32m -Xmx512m -XX:+UseG1GC
-            - OPAL_ADMINISTRATOR_PASSWORD=password
-            - RSERVER_HOST=rserver2
-            - POSTGRESIDS_HOST=postgres2
-            - POSTGRESIDS_DATABASE=opal_id
-            - POSTGRESIDS_USER=opal
-            - POSTGRESIDS_PASSWORD=opalpass  
-            - POSTGRESDATA_HOST=postgres2 
-            - POSTGRESDATA_DATABASE=opal_data
-            - POSTGRESDATA_USER=opal
-            - POSTGRESDATA_PASSWORD=opalpass  
-            - CNSIM_FILE=cnsim2.csv
-
-    postgres3:
-        image: idragan/postgres-sophia
-        hostname: postgres3
-        entrypoint: ["docker-entrypoint.sh", "-c", "config_file=/sophia/conf/postgresql.conf"]
-        environment:
-                - POSTGRES_PASSWORD=opalpass    
-        volumes:
-                - pgdata3:/sophia/data         
-                  # added pgdata volume to separate it from the main container  
-                - ./postgresql.conf:/sophia/conf/postgresql.conf
-        shm_size: '1gb'          
-
-    rserver3:
-        image: obiba/opal-rserver:latest
-        hostname: rserver1
-        environment:
-            - JAVA_OPTS=-Xms64m -Xmx512m -XX:+UseG1GC
-        volumes:
-            - srv3:/srv
-
-
-    opal_server3:
-        image: idragan/opal-sophia
-        hostname: opal_server3
-        expose:
-            - 8443
-            - 8080
-        ports:
-            - "9843:8443"
-            - "9880:8080"
-            # Ports convention: <port on host>:<port inside container>
-        links:
-            - rserver3
-            - postgres3  
-        environment:
-            - JAVA_OPTS=-Xms32m -Xmx512m -XX:+UseG1GC
-            - OPAL_ADMINISTRATOR_PASSWORD=password
-            - RSERVER_HOST=rserver3 
-            - POSTGRESIDS_HOST=postgres3
-            - POSTGRESIDS_DATABASE=opal_id
-            - POSTGRESIDS_USER=opal
-            - POSTGRESIDS_PASSWORD=opalpass  
-            - POSTGRESDATA_HOST=postgres3 
-            - POSTGRESDATA_DATABASE=opal_data
-            - POSTGRESDATA_USER=opal
-            - POSTGRESDATA_PASSWORD=opalpass  
-            - CNSIM_FILE=cnsim3.csv
 volumes:
-    srv1:
-    pgdata1:        
-    srv2:
-    pgdata2:        
-    srv3:
-    pgdata3:        
+    obelisk_data1:
