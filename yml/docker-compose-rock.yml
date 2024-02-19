@@ -1,0 +1,15 @@
+version: '3.2'
+services:
+  rock-obelisk:
+        image: obiba/rock:latest
+        hostname: rock-obelisk1
+        environment:
+            - JAVA_OPTS=-Xms32m -Xmx512m -XX:+UseG1GC
+        expose:
+          - 8085
+        volumes:
+          - rock-library1:/var/lib/rock/R/library
+
+volumes:
+    rock-library1:
+

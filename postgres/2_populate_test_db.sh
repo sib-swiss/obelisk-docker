@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-export PGPASSWORD=POSTGRES_PASSWORD
+export PGPASSWORD=POSTGRES_PG_PASSWORD
 
 # load the database
 psql -v ON_ERROR_STOP=1 --username postgres --dbname obelisk -f /scripts/OMOPCDM_postgresql_5.4_ddl.sql

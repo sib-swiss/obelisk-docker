@@ -15,5 +15,5 @@ sed s/@host@/$POSTGRESDATA_HOST/g /opt/opal/data/obelisk_resource | \
       sed s/@user@/$POSTGRESDATA_USER/g | \
       sed s/@password@/$POSTGRESDATA_PASSWORD/g | \
 opal rest -o http://localhost:8080 -u administrator -p $OPAL_ADMINISTRATOR_PASSWORD -m POST /project/obelisk/resources --content-type "application/json"
-opal rest -o http://localhost:8080 --user administrator --password  $OPAL_ADMINISTRATOR_PASSWORD --method POST "/project/obelisk/permissions/resources?type=GROUP&permission=RESOURCES_VIEW&principal=SOPHIA_WP2"
-
+opal rest -o http://localhost:8080 --user administrator --password  $OPAL_ADMINISTRATOR_PASSWORD --method POST "/project/obelisk/permissions/resources?type=GROUP&permission=RESOURCES_VIEW&principal=OBELISK_WP2"
+opal rest -o http://localhost:8080 --user administrator --password  $OPAL_ADMINISTRATOR_PASSWORD  --method POST "/permissions/datashield?type=GROUP&permission=DATASHIELD_USEW&principal=OBELISK_WP2"
