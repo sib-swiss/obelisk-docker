@@ -3,5 +3,11 @@ export OPAL_PG_PASS=opal2
 export OPAL_ADMIN_PASS=changeme
 export ROCK_HOSTS="localhost:8085"
 export PG_HOST=localhost
+export PG_PORT=5435
+export ROCK_USER=rock
+export ROCK_PASS=rock
+export ROCK_OPAL_TOKEN=changemetoo
+
+
 
 

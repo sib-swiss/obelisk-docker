@@ -1,0 +1,2 @@
+
+sed s/@rock_token@/$ROCK_OPAL_TOKEN/g ./rock_token | curl -v --user "administrator:changeme" -X PUT http://localhost:7880/ws/apps/config -H 'Content-Type: application/json' -d @-
