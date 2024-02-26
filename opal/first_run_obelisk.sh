@@ -1,12 +1,11 @@
 #!/bin/bash
-echo {token:\"$ROCK_OPAL_TOKEN\"}| curl -v --user "administrator:$OPAL_ADMINISTRATOR_PASSWORD" -X PUT http://localhost:8080/ws/apps/config -H 'Content-Type: application/json' -d @-
-service opal stop
- if [ -n "$ROCK_HOSTS" ]
-  then
-    echo "Setting Rock R server connection..."
-    set_property "apps.discovery.rock.hosts" "$ROCK_HOSTS" "$OPAL_HOME/conf/opal-config.properties"
-  fi
-service opal start
+for i in ${ROCK_HOSTS//,/ }
+do
+ acc="$acc,{\"host\":\"http://$i\"}"
+done
+rhosts=`echo $acc | cut -c2-`
+
+echo {token:\"$ROCK_OPAL_TOKEN\", rockConfigs:[$rhosts]}| curl -v --user "administrator:$OPAL_ADMINISTRATOR_PASSWORD" -X PUT http://localhost:8080/ws/apps/config -H 'Content-Type: application/json' -d @-
 /opt/opal/bin/install_rock_libs.sh
 opal project -o http://localhost:8080 -u administrator -p $OPAL_ADMINISTRATOR_PASSWORD --add --name obelisk 
 #opal rest /datashield/package/dsBase/methods --opal http://localhost:8080 --user administrator --password  $OPAL_ADMINISTRATOR_PASSWORD --method PUT
