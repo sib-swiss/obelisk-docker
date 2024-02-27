@@ -1,0 +1,7 @@
+x='localhost:8085,localhost:8086'
+for i in ${x//,/ } 
+do
+ acc="$acc,{\"host\":\"https://$i\"}"
+done
+rhosts=`echo $acc | cut -c2-`
+echo $rhosts

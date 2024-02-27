@@ -3,6 +3,6 @@
         "project":"obelisk",
         "provider":"resourcex",
         "factory":"sql",
-        "parameters":"{\"driver\":\"postgresql\",\"host\":\"@host@\",\"port\":\"5432\",\"db\":\"obelisk\"}",
+        "parameters":"{\"driver\":\"postgresql\",\"host\":\"@host@\",\"port\":\"@port@\",\"db\":\"obelisk\"}",
         "credentials":"{\"username\":\"@user@\",\"password\":\"@password@\"}"
 }

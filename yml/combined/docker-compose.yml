@@ -9,8 +9,8 @@ services:
             - "5435:5432"
         entrypoint: ["docker-entrypoint.sh", "-c", "config_file=/obelisk/conf/postgresql.conf"]
         environment:
-                - POSTGRES_PASSWORD=opalpass
-                - POSTGRESDATA_PASSWORD=opalpass
+                - POSTGRES_PG_PASSWORD=$POSTGRES_PG_PASS
+                - OPAL_PG_PASSWORD=$OPAL_PG_PASS
         volumes:
                 - obelisk_data1:/obelisk/data
                   # added pgdata volume to separate it from the main container  
@@ -42,16 +42,17 @@ services:
             - rock-obelisk  
         environment:
             - JAVA_OPTS=-Xms32m -Xmx512m -XX:+UseG1GC
-            - OPAL_ADMINISTRATOR_PASSWORD=password
-            - ROCK_HOSTS=rock-obelisk1:8085
-            - POSTGRESIDS_HOST=pg-obelisk1
+            - OPAL_ADMINISTRATOR_PASSWORD=$OPAL_ADMIN_PASS
+            - ROCK_HOSTS=rock-obelisk:8085
+            - POSTGRESIDS_HOST=pg-obelisk
             - POSTGRESIDS_DATABASE=opal_id
             - POSTGRESIDS_USER=opal
-            - POSTGRESIDS_PASSWORD=opalpass  
-            - POSTGRESDATA_HOST=pg-obelisk1
+            - POSTGRESIDS_PASSWORD=$OPAL_PG_PASS
+            - POSTGRESDATA_HOST=$PG_HOST
+            - POSTGRESDATA_PORT=$PG_PORT
             - POSTGRESDATA_DATABASE=opal_data
             - POSTGRESDATA_USER=opal
-            - POSTGRESDATA_PASSWORD=opalpass  
-                
+            - POSTGRESDATA_PASSWORD=$OPAL_PG_PASS
+
 volumes:
     obelisk_data1:

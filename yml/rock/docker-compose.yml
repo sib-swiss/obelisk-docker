@@ -1,0 +1,22 @@
+version: '3.2'
+services:
+  rock-obelisk:
+      image: obiba/rock:latest
+      hostname: rock-obelisk1
+      environment:
+          - JAVA_OPTS=-Xms32m -Xmx512m -XX:+UseG1GC
+          - ROCK_USER_NAME=$ROCK_USER
+          - ROCK_USER_PASSWORD=$ROCK_PASS
+          - ROCK_OPAL_SERVER=192.168.1.147:7880
+          - ROCK_SERVER=192.168.1.147:8085
+          - ROCK_OPAL_TOKEN=$ROCK_OPAL_TOKEN
+      expose:
+          - 8085
+      ports:
+          - "8085:8085"
+      volumes:
+          - rock-library1:/var/lib/rock/R/library
+
+volumes:
+    rock-library1:
+

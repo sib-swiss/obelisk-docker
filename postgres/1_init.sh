@@ -2,8 +2,8 @@
 set -e
 export PGPASSWORD=$POSTGRES_PASSWORD
 psql -v ON_ERROR_STOP=1 --username postgres --dbname postgres <<-EOSQL
-    create user opalroot with encrypted password '$POSTGRESDATA_PASSWORD';
-    create user opal with encrypted password '$POSTGRESDATA_PASSWORD'; 
+    create user opalroot with encrypted password '$OPAL_PG_PASSWORD';
+    create user opal with encrypted password '$OPAL_PG_PASSWORD'; 
     
     create database opal_data;
     alter database opal_data owner to opalroot;
