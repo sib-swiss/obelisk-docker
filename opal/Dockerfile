@@ -10,6 +10,7 @@ RUN chmod 755 /opt/opal/bin/first_run_obelisk.sh
 RUN chmod 755 /opt/opal/bin/postinstall.sh
 RUN echo  "/opt/opal/bin/first_run_obelisk.sh" >> /opt/opal/bin/first_run.sh
 RUN echo  "mv /opt/opal/bin/first_run_obelisk.sh /opt/opal/bin/first_run_obelisk.sh.done"  >> /opt/opal/bin/first_run.sh
+RUN echo  'set_property "org.obiba.opal.r.repos" "https://cloud.r-project.org,https://cran.obiba.org"'  >> /opt/opal/bin/start.sh
 
 
 

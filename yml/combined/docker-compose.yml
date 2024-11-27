@@ -9,7 +9,7 @@ services:
             - "5435:5432"
         entrypoint: ["docker-entrypoint.sh", "-c", "config_file=/obelisk/conf/postgresql.conf"]
         environment:
-                - POSTGRES_PG_PASSWORD=$POSTGRES_PG_PASS
+                - POSTGRES_PASSWORD=$POSTGRES_PG_PASS
                 - OPAL_PG_PASSWORD=$OPAL_PG_PASS
         volumes:
                 - obelisk_data1:/obelisk/data
@@ -20,10 +20,12 @@ services:
 
 
     rock-obelisk:
-        image: obiba/rock:latest
+        image: datashield/rock-base:latest
         hostname: rock-obelisk1
         environment:
-            - JAVA_OPTS=-Xms32m -Xmx512m -XX:+UseG1GC
+            - JAVA_OPTS=-Xms32m -Xmx8g -XX:+UseG1GC
+        volumes:
+            - rock-library1:/var/lib/rock/R/library
         expose:
           - 8085
 
@@ -41,7 +43,7 @@ services:
             - pg-obelisk
             - rock-obelisk  
         environment:
-            - JAVA_OPTS=-Xms32m -Xmx512m -XX:+UseG1GC
+            - JAVA_OPTS=-Xms32m -Xmx2g -XX:+UseG1GC
             - OPAL_ADMINISTRATOR_PASSWORD=$OPAL_ADMIN_PASS
             - ROCK_HOSTS=rock-obelisk:8085
             - POSTGRESIDS_HOST=pg-obelisk
@@ -53,6 +55,12 @@ services:
             - POSTGRESDATA_DATABASE=opal_data
             - POSTGRESDATA_USER=opal
             - POSTGRESDATA_PASSWORD=$OPAL_PG_PASS
+            - OPAL_PROJECT_NAME=sophia
+            - OPAL_RESOURCE_NAME=db
+            - OPAL_PRIVILEGED_GROUP=OBELISK_WP2
+            - ROCK_HOSTS=rock-obelisk1:8085
+
 
 volumes:
     obelisk_data1:
+    rock-library1:  
