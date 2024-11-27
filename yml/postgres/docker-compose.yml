@@ -3,8 +3,8 @@ services:
     pg-obelisk:
         image: idragan/postgres-obelisk
         hostname: pg-obelisk1
-        networks: 
-                - obelisk
+          #        networks: 
+          #            - obelisk
         expose:
                 - 5432
         ports:
@@ -23,6 +23,6 @@ services:
 volumes:
     obelisk_data1:
 
-networks:
-  obelisk:
-    external: true
+      #networks:
+  #  obelisk:
+  #  external: true

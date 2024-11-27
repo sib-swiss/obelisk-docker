@@ -1,17 +1,18 @@
 version: '3.2'
 services:
-  rock-obelisk:
-      image: obiba/rock:latest
+  rock-obelisk1:
+      image: datashield/rock-base:latest
       hostname: rock-obelisk1
-      networks: 
-          - obelisk
+        #      networks: 
+        #  - obelisk
       environment:
           - JAVA_OPTS=-Xms32m -Xmx512m -XX:+UseG1GC
           - ROCK_USER_NAME=$ROCK_USER
           - ROCK_USER_PASSWORD=$ROCK_PASS
-          - ROCK_OPAL_SERVER=opal-obelisk1:7880
+          - ROCK_OPAL_SERVER=192.168.1.147:7880
           - ROCK_SERVER=rock-obelisk1:8085
           - ROCK_OPAL_TOKEN=$ROCK_OPAL_TOKEN
+          - ROCK_CLUSTER=default
       expose:
           - 8085
       ports:
@@ -19,9 +20,30 @@ services:
       volumes:
           - rock-library1:/var/lib/rock/R/library
 
+
+  rock-obelisk2:
+      image: obiba/rock:latest
+      hostname: rock-obelisk2
+        # networks: 
+        #  - obelisk
+      environment:
+          - JAVA_OPTS=-Xms32m -Xmx512m -XX:+UseG1GC
+          - ROCK_USER_NAME=$ROCK_USER
+          - ROCK_USER_PASSWORD=$ROCK_PASS
+          - ROCK_OPAL_SERVER=192.168.1.147:7880
+          - ROCK_SERVER=rock-obelisk2:8085
+          - ROCK_OPAL_TOKEN=$ROCK_OPAL_TOKEN
+          - ROCK_CLUSTER=default
+      expose:
+          - 8085
+      ports:
+          - "8086:8085"
+      volumes:
+          - rock-library2:/var/lib/rock/R/library
+
 volumes:
     rock-library1:
-
-networks:
-  obelisk:
-    external: true
+    rock-library2:
+      #networks:
+      #obelisk:
+      #external: true

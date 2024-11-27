@@ -3,8 +3,8 @@ services:
     opal-obelisk:
         image: idragan/opal-obelisk
         hostname: opal-obelisk1
-        networks: 
-          - obelisk  
+          #       networks: 
+          #- obelisk  
         expose:
           - 8443
           - 8080
@@ -14,7 +14,7 @@ services:
         environment:
             - JAVA_OPTS=-Xms32m -Xmx512m -XX:+UseG1GC
             - OPAL_ADMINISTRATOR_PASSWORD=$OPAL_ADMIN_PASS
-            - ROCK_HOSTS=localhost:8085
+            - ROCK_HOSTS=$ROCK_HOSTS
             - POSTGRESIDS_HOST=$PG_HOST
             - POSTGRESIDS_DATABASE=opal_id
             - POSTGRESIDS_USER=opal
@@ -28,6 +28,6 @@ services:
             - ROCK_USER_PASSWORD=$ROCK_PASS    
             - ROCK_OPAL_TOKEN=$ROCK_OPAL_TOKEN
 
-networks:
-  obelisk:
-    external: true
+              #networks:
+              #obelisk:
+              #external: true
