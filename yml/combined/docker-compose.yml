@@ -24,8 +24,8 @@ services:
         hostname: rock-obelisk1
         environment:
             - JAVA_OPTS=-Xms32m -Xmx8g -XX:+UseG1GC
-        volumes:
-            - rock-library1:/var/lib/rock/R/library
+              # volumes:
+              # - rock-library1:/var/lib/rock/R/library
         expose:
           - 8085
 
@@ -63,4 +63,4 @@ services:
 
 volumes:
     obelisk_data1:
-    rock-library1:  
+      #    rock-library1:  
