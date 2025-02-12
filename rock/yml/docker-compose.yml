@@ -1,0 +1,28 @@
+version: '3.2'
+services:
+  rock-obelisk1:
+      image: idragan/rock-dsswissknife:latest
+      hostname: rock-obelisk1
+        #      networks: 
+        #  - obelisk
+      environment:
+          - JAVA_OPTS=-Xms32m -Xmx32G -XX:+UseG1GC
+          - ROCK_USER_NAME=$ROCK_USER
+          - ROCK_USER_PASSWORD=$ROCK_PASS
+          - ROCK_OPAL_SERVER=192.168.1.147:7880
+          - ROCK_SERVER=rock-obelisk1:8085
+          - ROCK_OPAL_TOKEN=$ROCK_OPAL_TOKEN
+          - ROCK_CLUSTER=default
+          - R_REPOS='https://sophia-fdb.vital-it.ch:8443/SIB-R','https://sophia-fdb.vital-it.ch:8443/CRAN'
+
+      expose:
+          - 8085
+      ports:
+          - "8085:8085"
+      volumes:
+          - rock-library1:/var/lib/rock/R/library
+
+
+
+volumes:
+    rock-library1:

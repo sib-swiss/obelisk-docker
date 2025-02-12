@@ -5,7 +5,7 @@ export ROCK_HOSTS="192.168.1.147:8085,192.168.1.147:8086"
 export PG_HOST=pg-obelisk1
 export PG_PORT=5432
 export ROCK_USER=rock
-export ROCK_PASS=rock
+export ROCK_PASS=Rock1234!
 export ROCK_OPAL_TOKEN=changemetoo
 
 
