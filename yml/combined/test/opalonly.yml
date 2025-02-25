@@ -1,0 +1,29 @@
+version: '3.2'
+services:
+    opal-obelisk:
+        image: idragan/opal-obelisk
+        hostname: opal-obelisk1
+        expose:
+            - 8443
+            - 8080
+        ports:
+            - "6843:8443"
+            - "6880:8080"
+            # Ports convention: <port on host>:<port inside container>
+        environment:
+            - JAVA_OPTS=-Xms32m -Xmx4g -XX:+UseG1GC
+            - OPAL_ADMINISTRATOR_PASSWORD=$OPAL_ADMIN_PASS
+            - ROCK_HOSTS=http://rock-obelisk1:8085
+            - POSTGRESIDS_HOST=pg-obelisk1
+            - POSTGRESIDS_DATABASE=opal_id
+            - POSTGRESIDS_USER=opal
+            - POSTGRESIDS_PASSWORD=$OPAL_PG_PASS
+            - POSTGRESDATA_HOST=$PG_HOST
+            - POSTGRESDATA_PORT=$PG_PORT
+            - POSTGRESDATA_DATABASE=opal_data
+            - POSTGRESDATA_USER=opal
+            - POSTGRESDATA_PASSWORD=$OPAL_PG_PASS
+            - OPAL_PROJECT_NAME=obelisk
+            - OPAL_RESOURCE_NAME=db
+            - OPAL_PRIVILEGED_GROUP=OBELISK_WP2
+
