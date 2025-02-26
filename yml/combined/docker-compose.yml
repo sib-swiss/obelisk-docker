@@ -66,6 +66,8 @@ services:
             - OPAL_PROJECT_NAME=obelisk
             - OPAL_RESOURCE_NAME=db
             - OPAL_PRIVILEGED_GROUP=OBELISK_WP2
+            - R_REPOS='https://sophia-fdb.vital-it.ch:8443/SIB-R','https://sophia-fdb.vital-it.ch:8443/CRAN'
+            - CSRF_ALLOWED='*'
 
 
 volumes:
