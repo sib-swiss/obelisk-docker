@@ -1,4 +1,4 @@
-FROM obiba/opal:4.7.4
+FROM obiba/opal:5.1.2
 
 COPY  obelisk_resource /opt/opal/data/
 COPY first_run_obelisk.sh /opt/opal/bin/

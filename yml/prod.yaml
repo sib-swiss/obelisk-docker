@@ -1,0 +1,77 @@
+version: '3.2'
+services:
+    pg-obelisk1:
+        image: idragan/postgres-obelisk
+        hostname: pg-obelisk1
+        expose:
+            - 5432
+        ports:
+            - "5435:5432"
+        entrypoint: ["docker-entrypoint.sh", "-c", "config_file=/obelisk/conf/postgresql.conf"]
+        environment:
+                - POSTGRES_PASSWORD=$POSTGRES_PG_PASS
+                - OPAL_PG_PASSWORD=$OPAL_PG_PASS
+        volumes:
+                - /data/psql_data:/obelisk/data
+                - ./postgresql.conf:/obelisk/conf/postgresql.conf
+        shm_size: '1gb'
+
+
+    rock-obelisk1:
+      image: idragan/rock-dsswissknife:latest
+      hostname: rock-obelisk1
+      environment:
+          - JAVA_OPTS=-Xms32m -Xmx32g -XX:+UseG1GC
+          - ROCK_OPAL_SERVER=http://opal-obelisk1:8080
+          - ROCK_SERVER=http://rock-obelisk1:8085
+          #- ROCK_OPAL_TOKEN=$ROCK_OPAL_TOKEN
+          - ROCK_CLUSTER=default
+          - R_REPOS='https://sophia-fdb.vital-it.ch:8443/SIB-R','https://sophia-fdb.vital-it.ch:8443/CRAN'
+
+      expose:
+          - 8085
+      ports:
+          - "8085:8085"
+      volumes:
+          - rock-library1:/var/lib/rock/R/library
+
+    opal-obelisk:
+        image: idragan/opal-obelisk:5.0.0
+        hostname: opal-obelisk1
+        expose:
+            - 8443
+            - 8080
+        ports:
+            - "8443:8443"
+            - "8080:8080"
+            # Ports convention: <port on host>:<port inside container>
+        links:
+            - pg-obelisk1
+            - rock-obelisk1
+        environment:
+            - JAVA_OPTS=-Xms32m -Xmx4g -XX:+UseG1GC
+            - OPAL_ADMINISTRATOR_PASSWORD=$OPAL_ADMIN_PASS
+            - ROCK_HOSTS=http://rock-obelisk1:8085
+            - POSTGRESIDS_HOST=pg-obelisk1
+            - POSTGRESIDS_DATABASE=opal_id
+            - POSTGRESIDS_USER=opal
+            - POSTGRESIDS_PASSWORD=$OPAL_PG_PASS
+            - POSTGRESDATA_HOST=$PG_HOST
+            - POSTGRESDATA_PORT=$PG_PORT
+            - POSTGRESDATA_DATABASE=opal_data
+            - POSTGRESDATA_USER=opal
+            - POSTGRESDATA_PASSWORD=$OPAL_PG_PASS
+            - OPAL_PROJECT_NAME=obelisk
+            - OPAL_RESOURCE_NAME=db
+            - OPAL_PRIVILEGED_GROUP=OBELISK_WP2
+            - R_REPOS='https://sophia-fdb.vital-it.ch:8443/SIB-R','https://sophia-fdb.vital-it.ch:8443/CRAN'
+            - CSRF_ALLOWED=*
+
+
+volumes:
+    rock-library1:
+~                                                                                                                                       
+~                                                                                                                                       
+"docker-compose.yaml" 73L, 2391C                                                                                      72,5          All
+
+
