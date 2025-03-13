@@ -1,13 +1,9 @@
 export POSTGRES_PG_PASS=opal1
 export OPAL_PG_PASS=opal2
 export OPAL_ADMIN_PASS=changeme
-#export ROCK_HOSTS="192.168.1.147:8085,192.168.1.147:8086"
 export PG_HOST=pg-obelisk1
 export PG_PORT=5432
-export ROCK_USER=rock
-export ROCK_PASS=Rock1234!
-export ROCK_OPAL_TOKEN=changemetoo
-
+export AGATE_KEY=1cQzjs7S7DG1fnW43N5BtDM4cRKiiz
 
 
 
