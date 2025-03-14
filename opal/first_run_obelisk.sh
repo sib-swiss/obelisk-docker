@@ -20,7 +20,7 @@ sleep 30
 #set_property "org.obiba.realm.url" "$AGATE_URL" /srv/conf/opal-config.properties
 #set_property "org.obiba.realm.service.key" "$AGATE_AUTH_KEY" /srv/conf/opal-config.properties
 echo '{"name": "Opal","languages": ["en"],"defaultCharSet": "ISO-8859-1","enforced2FA": false,"allowRPackageManagement": true}' | opal rest -o http://localhost:8080 --user administrator --password  $OPAL_ADMINISTRATOR_PASSWORD --method PUT "/system/conf/general" --content-type="application/json"
-opal rest -o http://localhost:8080 --user administrator --password  $OPAL_ADMINISTRATOR_PASSWORD --method PUT "/datashield/packages/_publish?profile=default&name=dsQueryLibraryServer&name=dsSwissKnife&name=resourcex&name=dsMOdual&name=dsMOprimal"
+opal rest -o http://localhost:8080 --user administrator --password  $OPAL_ADMINISTRATOR_PASSWORD --method PUT "/datashield/packages/_publish?profile=default&name=dsQueryLibraryServer&name=dsSwissKnife&name=resourcex&name=dsMOdual&name=dsMOprimal&name=dsBase"
 opal project -o http://localhost:8080 -u administrator -p $OPAL_ADMINISTRATOR_PASSWORD --add --name obelisk 
 #opal rest /datashield/package/dsBase/methods --opal http://localhost:8080 --user administrator --password  $OPAL_ADMINISTRATOR_PASSWORD --method PUT
 sed s/@host@/$POSTGRESDATA_HOST/g /opt/opal/data/obelisk_resource | \
