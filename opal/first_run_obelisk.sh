@@ -14,8 +14,8 @@ set_property () {
   fi
   mv ${tmpfile} ${file}
 }
-#start with a pause in order to allow rock to finish:
-sleep 120
+# start with a pause to allow rock to finish
+sleep 30
 #set_property "org.obiba.opal.r.repos" "$R_REPOS" /srv/conf/opal-config.properties
 #set_property "org.obiba.realm.url" "$AGATE_URL" /srv/conf/opal-config.properties
 #set_property "org.obiba.realm.service.key" "$AGATE_AUTH_KEY" /srv/conf/opal-config.properties

@@ -1,8 +1,9 @@
 FROM datashield/rock-base:6.3.1
 RUN  DEBIAN_FRONTEND=noninteractive apt-get install -y libpq-dev build-essential
-COPY postinstall.sh /opt/bin/postinstall.sh
-RUN chmod +x /opt/bin/postinstall.sh
-RUN echo "/opt/bin/postinstall.sh" >> /opt/obiba/bin/first_run.sh
+RUN for mylib in dsSwissKnife resourcex dsQueryLibraryServer dsMOprimal dsMOdual; do \
+        [ -d "/var/lib/rock/R/library/$mylib" ] || Rscript -e "install.packages('$mylib', repos = c('https://obelisk-centralnode.vital-it.ch/SIB','https://obelisk-centralnode.vital-it.ch/CRAN','https://obelisk-centralnode.vital-it.ch/CRAN-DS'), upgrade = FALSE, lib = '/var/lib/rock/R/library')"; \
+done
+RUN echo "chown -R rock /var/lib/rock/R/library" >> /opt/obiba/bin/first_run.sh
 
 
 
