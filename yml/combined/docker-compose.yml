@@ -12,7 +12,7 @@ services:
                 - POSTGRES_PASSWORD=$POSTGRES_PG_PASS
                 - OPAL_PG_PASSWORD=$OPAL_PG_PASS
         volumes:
-                - obelisk_data1:/obelisk/data
+                - /data/psql_data:/obelisk/data
                 - ./postgresql.conf:/obelisk/conf/postgresql.conf
         shm_size: '1gb'
 
@@ -20,15 +20,12 @@ services:
     rock-obelisk1:
       image: idragan/rock-dsswissknife:latest
       hostname: rock-obelisk1
-        #      networks: 
-        #  - obelisk
       environment:
           - JAVA_OPTS=-Xms32m -Xmx32g -XX:+UseG1GC
-          - ROCK_OPAL_SERVER=http://opal-obelisk1:7880
+          - ROCK_OPAL_SERVER=http://opal-obelisk1:8080
           - ROCK_SERVER=http://rock-obelisk1:8085
-          - ROCK_OPAL_TOKEN=$ROCK_OPAL_TOKEN
           - ROCK_CLUSTER=default
-          - R_REPOS='https://sophia-fdb.vital-it.ch:8443/SIB-R','https://sophia-fdb.vital-it.ch:8443/CRAN'
+          - R_REPOS='https://obelisk-centralnode.vital-it.ch/SIB','https://obelisk-centralnode.vital-it.ch/CRAN','https://obelisk-centralnode.vital-it.ch/CRAN-DS'
 
       expose:
           - 8085
@@ -44,8 +41,8 @@ services:
             - 8443
             - 8080
         ports:
-            - "7843:8443"
-            - "7880:8080"
+            - "8443:8443"
+            - "8080:8080"
             # Ports convention: <port on host>:<port inside container>
         links:
             - pg-obelisk1
@@ -65,11 +62,15 @@ services:
             - POSTGRESDATA_PASSWORD=$OPAL_PG_PASS
             - OPAL_PROJECT_NAME=obelisk
             - OPAL_RESOURCE_NAME=db
-            - OPAL_PRIVILEGED_GROUP=OBELISK_WP2
-            - R_REPOS='https://sophia-fdb.vital-it.ch:8443/SIB-R','https://sophia-fdb.vital-it.ch:8443/CRAN'
-            - CSRF_ALLOWED='*'
+            - OPAL_PRIVILEGED_GROUP=obelisk-wp1
+            - R_REPOS='https://obelisk-centralnode.vital-it.ch/SIB','https://obelisk-centralnode.vital-it.ch/CRAN','https://obelisk-centralnode.vital-it.ch/CRAN-DS'
+            - CSRF_ALLOWED=*
+            - AGATE_AUTH_KEY=$AGATE_KEY
+            - AGATE_URL=https://obelisk-fdb-auth.sib.swiss
+            - APP_URL=https://obelisk-app.vital-it.ch
 
 
 volumes:
-    obelisk_data1:
-    rock-library1:  
+    rock-library1:
+                                                                                                                                                                                                                                                                                                                                                                   1,14          All
+
