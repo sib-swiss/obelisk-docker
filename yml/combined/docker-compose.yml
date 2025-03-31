@@ -12,7 +12,7 @@ services:
                 - POSTGRES_PASSWORD=$POSTGRES_PG_PASS
                 - OPAL_PG_PASSWORD=$OPAL_PG_PASS
         volumes:
-                - /data/psql_data:/obelisk/data
+                - <your data partition>:/obelisk/data
                 - ./postgresql.conf:/obelisk/conf/postgresql.conf
         shm_size: '1gb'
 
