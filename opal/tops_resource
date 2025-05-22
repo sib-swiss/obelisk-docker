@@ -1,0 +1,8 @@
+ {
+        "name":"db",
+        "project":"tops",
+        "provider":"resourcex",
+        "factory":"sql",
+        "parameters":"{\"driver\":\"postgresql\",\"host\":\"@host@\",\"port\":\"@port@\",\"db\":\"tops\"}",
+        "credentials":"{\"username\":\"@user@\",\"password\":\"@password@\"}"
+}

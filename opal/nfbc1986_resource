@@ -1,0 +1,8 @@
+ {
+        "name":"db",
+        "project":"nfbc1986",
+        "provider":"resourcex",
+        "factory":"sql",
+        "parameters":"{\"driver\":\"postgresql\",\"host\":\"@host@\",\"port\":\"@port@\",\"db\":\"nfbc1986\"}",
+        "credentials":"{\"username\":\"@user@\",\"password\":\"@password@\"}"
+}
