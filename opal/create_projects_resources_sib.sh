@@ -7,7 +7,7 @@ sed s/@host@/$POSTGRESDATA_HOST/g ./tops_resource | \
       sed s/@port@/$POSTGRESDATA_PORT/g | \
 opal rest -o https://obelisk-fdb.sib.swiss/sib -u administrator -p $OPAL_ADMINISTRATOR_PASSWORD -m POST /project/tops/resources --content-type "application/json"
 
-sed s/@host@/$POSTGRESDATA_HOST/g ./nfbc186_resource | \
+sed s/@host@/$POSTGRESDATA_HOST/g ./nfbc1986_resource | \
       sed s/@user@/$POSTGRESDATA_USER/g | \
       sed s/@password@/$POSTGRESDATA_PASSWORD/g | \
       sed s/@port@/$POSTGRESDATA_PORT/g | \
