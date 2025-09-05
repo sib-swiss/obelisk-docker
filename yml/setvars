@@ -1,6 +1,7 @@
 export POSTGRES_PG_PASS=<your password here>
 export OPAL_PG_PASS=<your password here>
 export OPAL_ADMIN_PASS=<your password here>
+export APP_PUBLIC_URL=<application public url here>
 export PG_HOST=pg-obelisk1
 export PG_PORT=5432
 export AGATE_KEY=1cQzjs7S7DG1fnW43N5BtDM4cRKiiz

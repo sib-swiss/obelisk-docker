@@ -41,7 +41,7 @@ services:
             - 8443
             - 8080
         ports:
-            - "443:8443"
+            - "8443:8443"
             - "8080:8080"
             # Ports convention: <port on host>:<port inside container>
         links:
@@ -67,7 +67,7 @@ services:
             - CSRF_ALLOWED=*
             - AGATE_AUTH_KEY=$AGATE_KEY
             - AGATE_URL=https://obelisk-fdb-auth.sib.swiss
-            - APP_URL=https://obelisk-app.vital-it.ch
+            - APP_URL=$APP_PUBLIC_URL
 
 
 volumes:
