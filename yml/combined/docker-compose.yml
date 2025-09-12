@@ -25,7 +25,7 @@ services:
           - ROCK_OPAL_SERVER=http://opal-obelisk1:8080
           - ROCK_SERVER=http://rock-obelisk1:8085
           - ROCK_CLUSTER=default
-          - R_REPOS='https://obelisk-centralnode.vital-it.ch/SIB','https://obelisk-centralnode.vital-it.ch/CRAN','https://obelisk-centralnode.vital-it.ch/CRAN-DS'
+          - R_REPOS='https://obelisk-fdb-auth.sib.swiss/SIB','https://obelisk-fdb-auth.sib.swiss/CRAN','https://obelisk-fdb-auth.sib.swiss/CRAN-DS'
 
       expose:
           - 8085
@@ -63,7 +63,7 @@ services:
             - OPAL_PROJECT_NAME=obelisk
             - OPAL_RESOURCE_NAME=db
             - OPAL_PRIVILEGED_GROUP=obelisk-wp1
-            - R_REPOS='https://obelisk-centralnode.vital-it.ch/SIB','https://obelisk-centralnode.vital-it.ch/CRAN','https://obelisk-centralnode.vital-it.ch/CRAN-DS'
+            - R_REPOS='https://obelisk-fdb-auth.sib.swiss/SIB','https://obelisk-fdb-auth.sib.swiss/CRAN','https://obelisk-fdb-auth.sib.swiss/CRAN-DS'
             - CSRF_ALLOWED=*
             - AGATE_AUTH_KEY=$AGATE_KEY
             - AGATE_URL=https://obelisk-fdb-auth.sib.swiss
@@ -72,5 +72,3 @@ services:
 
 volumes:
     rock-library1:
-                                                                                                                                                                                                                                                                                                                                                                   1,14          All
-
